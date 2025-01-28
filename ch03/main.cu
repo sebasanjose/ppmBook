@@ -25,6 +25,15 @@ int main() {
         hostMatrix[i] = i + 1; // Fill with numbers 1 to width*height
     }
 
+        // Print the squared matrix
+    printf("Original Matrix:\n");
+    for (int row = 0; row < height; row++) {
+        for (int col = 0; col < width; col++) {
+            printf("%d ", hostMatrix[row * width + col]);
+        }
+        printf("\n");
+    }
+
     // Allocate device memory
     int *deviceMatrix;
     cudaMalloc((void **)&deviceMatrix, width * height * sizeof(int));
