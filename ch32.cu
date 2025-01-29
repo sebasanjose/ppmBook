@@ -22,6 +22,14 @@ int main() {
     for (int i = 0; i < WIDTH * HEIGHT; i++) {
         hostMatrix[i] = i + 1;
     }
+    
+    printf("Original Matrix:\n");
+    for (int row = 0; row < HEIGHT; row++) {
+        for (int col = 0; col < WIDTH; col++) {
+            printf("%d ", hostMatrix[row * WIDTH + col]);
+        }
+        printf("\n");
+    }
 
     // Allocate device memory
     int *deviceMatrix;
