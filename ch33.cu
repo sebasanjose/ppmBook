@@ -46,6 +46,14 @@ int main() {
         205, 195, 185, 175, 165, 155
     };
 
+    printf("Original Image:\n");
+    for (int row = 0; row < HEIGHT; row++) {
+        for (int col = 0; col < WIDTH; col++) {
+            printf("%3d ", hostInput[row * WIDTH + col]);
+        }
+        printf("\n");
+    }
+
     unsigned char hostOutput[WIDTH * HEIGHT]; // Output image
 
     // Allocate device memory
