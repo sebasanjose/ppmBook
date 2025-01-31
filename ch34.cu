@@ -42,6 +42,13 @@ int main() {
         printf("\n");
     }
 
+    float hostN[WIDTH * WIDTH] = {
+        1, 2, 3, 4,
+        5, 6, 7, 8,
+        9, 10, 11, 12,
+        13, 14, 15, 16
+    };
+
     printf("Matrix N:\n");
     for (int i = 0; i < WIDTH; i++) {
         for (int j = 0; j < WIDTH; j++) {
@@ -49,13 +56,6 @@ int main() {
         }
         printf("\n");
     }
-
-    float hostN[WIDTH * WIDTH] = {
-        1, 2, 3, 4,
-        5, 6, 7, 8,
-        9, 10, 11, 12,
-        13, 14, 15, 16
-    };
 
     float hostP[WIDTH * WIDTH] = {0}; // Output matrix
 
