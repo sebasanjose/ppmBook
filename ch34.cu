@@ -34,6 +34,21 @@ int main() {
         9, 10, 11, 12,
         13, 14, 15, 16
     };
+    printf("Matrix M:\n");
+    for (int i = 0; i < WIDTH; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            printf("%6.2f ", hostM[i * WIDTH + j]);
+        }
+        printf("\n");
+    }
+
+    printf("Matrix N:\n");
+    for (int i = 0; i < WIDTH; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            printf("%6.2f ", hostN[i * WIDTH + j]);
+        }
+        printf("\n");
+    }
 
     float hostN[WIDTH * WIDTH] = {
         1, 2, 3, 4,
