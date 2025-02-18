@@ -131,7 +131,7 @@ int main() {
 
     // Measure times
     float timeGlobal = measureTime(vectorAddGlobal, h_A, h_B, h_C, d_A, d_B, d_C);
-    float timeConstant = measureTimeConstant(vectorAddConstant, h_A, h_B, h_C, d_A, d_B, d_C);
+    float timeConstant = measureTimeConstant(vectorAddConstant, h_B, h_C, d_A, d_B, d_C);
     float timeShared = measureTime(vectorAddShared, h_A, h_B, h_C, d_A, d_B, d_C);
     float timeRegisters = measureTime(vectorAddRegisters, h_A, h_B, h_C, d_A, d_B, d_C);
     float timeLocal = measureTime(vectorAddLocal, h_A, h_B, h_C, d_A, d_B, d_C);
