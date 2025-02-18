@@ -81,6 +81,33 @@ float measureTime(void (*kernel)(float*, float*, float*), float *A, float *B, fl
     return milliseconds;
 }
 
+float measureTimeConstant(void (*kernel)(float*, float*), float *B, float *C, float *d_B, float *d_C) {
+    cudaMemcpy(d_B, B, N * sizeof(float), cudaMemcpyHostToDevice);
+
+    cudaEvent_t start, stop;
+    cudaEventCreate(&start);
+    cudaEventCreate(&stop);
+
+    dim3 blockSize(BLOCK_SIZE);
+    dim3 gridSize((N + BLOCK_SIZE - 1) / BLOCK_SIZE);
+
+    cudaEventRecord(start);
+    kernel<<<gridSize, blockSize>>>(d_B, d_C);
+    cudaEventRecord(stop);
+
+    cudaMemcpy(C, d_C, N * sizeof(float), cudaMemcpyDeviceToHost);
+
+    cudaEventSynchronize(stop);
+    float milliseconds = 0;
+    cudaEventElapsedTime(&milliseconds, start, stop);
+
+    cudaEventDestroy(start);
+    cudaEventDestroy(stop);
+
+    return milliseconds;
+}
+
+
 int main() {
     float *h_A, *h_B, *h_C;
     float *d_A, *d_B, *d_C;
@@ -104,7 +131,7 @@ int main() {
 
     // Measure times
     float timeGlobal = measureTime(vectorAddGlobal, h_A, h_B, h_C, d_A, d_B, d_C);
-    float timeConstant = measureTime(vectorAddConstant, h_A, h_B, h_C, d_A, d_B, d_C);
+    float timeConstant = measureTimeConstant(vectorAddConstant, h_A, h_B, h_C, d_A, d_B, d_C);
     float timeShared = measureTime(vectorAddShared, h_A, h_B, h_C, d_A, d_B, d_C);
     float timeRegisters = measureTime(vectorAddRegisters, h_A, h_B, h_C, d_A, d_B, d_C);
     float timeLocal = measureTime(vectorAddLocal, h_A, h_B, h_C, d_A, d_B, d_C);
